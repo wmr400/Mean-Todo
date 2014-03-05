@@ -1,0 +1,41 @@
+<!doctype html>
+
+<!-- ASSIGN OUR ANGULAR MODULE -->
+<html ng-app="todoApp">
+<head>
+	<!-- META -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+
+	<title>MEAN Todo App</title>
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="libs/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" href="libs/animate.css/animate.min.css">
+
+	<!-- CUSTOM CSS -->
+	<link rel="stylesheet" href="styles/style.css">
+
+	<!-- JS -->
+	<script src="libs/jquery/dist/jquery.min.js"></script>
+	<script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="libs/angular/angular.min.js"></script>
+	<script src="libs/angular-route/angular-route.min.js"></script>
+	
+	<!-- ANGULAR CUSTOM -->
+	<script src="scripts/controllers/index.js"></script> 
+	<script src="scripts/controllers/main.js"></script> 
+	<script src="scripts/services/index.js"></script> 
+	<script src="scripts/services/todo.js"></script> 
+	<script src="scripts/appRoutes.js"></script>
+	<script src="scripts/app.js"></script>
+</head>
+<body>
+	<div class="container">
+
+		<div ng-view></div>
+
+	</div>
+</body>
+</html>

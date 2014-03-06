@@ -4,7 +4,7 @@ var todoSchema = mongoose.Schema({
 	text: String,
 	done: Boolean,
 	person_id: {
-		type: Schema.Types.ObjectId,
+		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Person'
 	}
 });

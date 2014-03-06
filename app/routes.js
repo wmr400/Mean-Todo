@@ -20,7 +20,7 @@ module.exports = function(app) {
 		deleteTodo(req, res);
 	});
 
-gitgutter	// Application.
+	// Application.
 	app.get('*', function(req, res) {
 		res.sendfile('./public/index.html');
 	});

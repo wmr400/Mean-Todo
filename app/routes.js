@@ -1,4 +1,9 @@
-module.exports = function(app, repository) {
+var repositoryFactory = require('./repositories/repositoryFactory');
+
+module.exports = function(app) {
+
+	var todoRepository = repositoryFactory.create('Todo');
+	var personRepository = repositoryFactory.create('Person');
 
 	// Get all todos.
 	app.get('/api/todos', function(req, res) {		
@@ -15,13 +20,13 @@ module.exports = function(app, repository) {
 		deleteTodo(req, res);
 	});
 
-	// Application.
+gitgutter	// Application.
 	app.get('*', function(req, res) {
 		res.sendfile('./public/index.html');
 	});
 
 	function findAllTodos(res) {
-		repository.FindAllTodos(function(err, todos) {
+		todoRepository.FindAllTodos(function(err, todos) {
 			if (err) {
 				res.send(err);
 			}
@@ -31,7 +36,7 @@ module.exports = function(app, repository) {
 	}
 
 	function saveTodo(req, res) {
-		repository.Save({
+		todoRepository.Save({
 			text: req.body.text,
 			done: false
 		}, function(err, todo) {
@@ -44,7 +49,7 @@ module.exports = function(app, repository) {
 	}
 
 	function deleteTodo(req, res) {
-		repository.DeleteById({
+		todoRepository.DeleteById({
 			_id : req.params.todo_id
 		}, function(err, todo) {
 			if (err) {

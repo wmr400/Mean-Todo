@@ -3,7 +3,6 @@ var express = require('express');
 var app = express();
 var mongoose = require('mongoose');
 var database = require('./config/database');
-var repositoryFactory = require('./app/repositories/repositoryFactory');
 
 // Configuration.
 mongoose.connect(database.url);
@@ -16,7 +15,7 @@ app.configure(function() {
 });
 
 // Load the routes.
-require('./app/routes')(app, repositoryFactory.create('todo'));
+require('./app/routes')(app);
 
 // listen (start app with node server.js) ======================================
 app.listen(8080);

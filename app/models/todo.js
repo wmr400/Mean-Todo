@@ -9,4 +9,9 @@ var todoSchema = mongoose.Schema({
 	}
 });
 
+todoSchema.index({
+	person_id: 1,
+	text: 1
+});
+
 module.exports = mongoose.model('Todo', todoSchema);

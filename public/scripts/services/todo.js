@@ -1,6 +1,6 @@
 angular.module('todoApp.services')
 
-	.factory('TodoService', ['$http', function($http){
+	.factory('TodoService', ['$http', function($http) {
 		return {
 			get: function() {
 				return $http.get('/api/todos');

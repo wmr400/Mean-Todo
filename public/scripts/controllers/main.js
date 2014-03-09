@@ -1,11 +1,6 @@
 angular.module('todoApp.controllers')
 
-	.controller('MainController', [
-		'$scope', 
-		'$http', 
-		'TodoService', 
-		'PersonService' 
-		function($scope, $http, TodoService, PersonService) {
+	.controller('MainController', ['$scope', '$http', 'TodoService', 'PersonService', function($scope, $http, TodoService, PersonService) {
 			$scope.formData = {};
 
 			// We've landed on the home page, retrieve all todos and display them.
@@ -54,5 +49,9 @@ angular.module('todoApp.controllers')
 					.error(function(data) {
 						console.log('Error: ' + data);
 					});
+			};
+
+			$scope.doStuff = function() {
+				alert($scope.currentUser);
 			};
 	}]);

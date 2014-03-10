@@ -17,30 +17,31 @@
 	</div>
 </div>
 
-<!-- TODO LIST -->
-<div id="usernames" class="row">
-	<div class="dropdown">
-	  <button class="btn dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
-				    Leave your name!
-		<span class="caret"></span>
-	  </button>
-		<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-			<li role="presentation"><a href="#" ng-click="doStuff()">I'm a new user!</a></li>
-			<li role="presentation" class="divider"></li>
-			<li role="presentation" class="dropdown-header">Pick an existing user...</li>
-			<li role="presentation"><a href="#" ng-model="currentUser" ng-click="doStuff()">Wouter</a></li>
-		</ul>
-	</div>
-</div>
-
 <!-- FORM TO CREATE TODOS -->
-<div id="todo-form" class="row">
-	<div class="col-sm-8 col-sm-offset-2 text-center">
+<div id="todo-form" class="container">
+	<!-- <div class="col-sm-8 col-sm-offset-2"> -->
+	<div>
 		<form>
 			
-			<div class="form-group">
+			<div class="form-group row">
 				<!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
-				<input type="text" class="form-control input-lg text-center" placeholder="TODO" ng-model="formData.text">
+				<label for="todoBox" class="col-sm-2 col-sm-offset-1" control-label>Your todo</label>
+				<div class="col-sm-8">
+					<input type="text" id="todoBox" class="form-control input-lg text-center" placeholder="TODO" ng-model="formData.text">
+				</div>	
+			</div>
+
+			<div class="form-group row">
+				<label for="userPicker" class="col-sm-2" control-label>Your name</label>
+				<div class="col-sm-12">
+					<select class="form-control" id="userPicker">
+					  <option>Wouter</option>
+					  <option>2</option>
+					  <option>3</option>
+					  <option>4</option>
+					  <option>5</option>
+					</select>
+				</div>	
 			</div>
 
 			<!-- createToDo() WILL CREATE NEW TODOS -->

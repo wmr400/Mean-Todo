@@ -28,7 +28,8 @@ module.exports = function(app) {
 	function findAllTodos(res) {
 		todoRepository.FindAllTodos(function(err, todos) {
 			if (err) {
-				res.send(err);
+				//res.send(err);
+				console.log(err);
 			}
 		
 			res.json(todos);

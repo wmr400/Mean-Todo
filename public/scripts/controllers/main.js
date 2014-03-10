@@ -50,8 +50,4 @@ angular.module('todoApp.controllers')
 						console.log('Error: ' + data);
 					});
 			};
-
-			$scope.doStuff = function() {
-				alert($scope.currentUser);
-			};
 	}]);

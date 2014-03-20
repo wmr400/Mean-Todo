@@ -17,9 +17,19 @@
 	<!-- CUSTOM CSS -->
 	<link rel="stylesheet" href="styles/style.css">
 
+	
+</head>
+<body>
+	<div class="container">
+
+		<div ng-view></div>
+
+	</div>
+
 	<!-- JS -->
 	<script src="libs/jquery/dist/jquery.min.js"></script>
 	<script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="libs/bootstrap-growl/jquery.bootstrap-growl-min.js"></script>
 	<script src="libs/angular/angular.min.js"></script>
 	<script src="libs/angular-route/angular-route.min.js"></script>
 	
@@ -31,12 +41,5 @@
 	<script src="scripts/services/person.js"></script>
 	<script src="scripts/appRoutes.js"></script>
 	<script src="scripts/app.js"></script>
-</head>
-<body>
-	<div class="container">
-
-		<div ng-view></div>
-
-	</div>
 </body>
 </html>

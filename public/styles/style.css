@@ -9,3 +9,7 @@ body {
 #todo-list { 
 	margin-bottom:30px; 
 }
+
+div .hide-true {
+	display: none;
+}

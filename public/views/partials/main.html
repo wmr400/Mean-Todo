@@ -35,6 +35,8 @@
 	</div>
 </div>
 
+
+
 <div class="row col-sm-10 col-sm-offset-1">
 	<!-- TODO LIST -->
 	<div id="todo-list" class="panel panel-primary"> 
@@ -43,7 +45,8 @@
 	  	</div>
 		  	<div class="panel-body text-center">
 
-		  	<div class="hide-{{ todos.length > 0 }}">
+		  	<!-- <div class="hide-{{ todos.length > 0 }}"> -->
+		  	<div ng-show="noTodos()" class="animation">
 		  		No todos...
 		  	</div>
 
@@ -55,4 +58,10 @@
 			</div>
 		</div>
 	</div>
+</div>
+
+<div class="row col-sm-6 col-sm-offset-1">
+	<alert class="animation" ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">
+		{{alert.msg}}
+	</alert>
 </div>

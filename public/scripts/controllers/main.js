@@ -2,6 +2,7 @@ angular.module('todoApp.controllers')
 
 	.controller('MainController', ['$scope', '$http', 'TodoService', 'PersonService', function($scope, $http, TodoService, PersonService) {
 			$scope.formData = {};
+			$scope.alerts = [];
 
 			// We've landed on the home page, retrieve all todos and display them.
 			TodoService.get()
@@ -29,6 +30,10 @@ angular.module('todoApp.controllers')
 
 					TodoService.create($scope.formData)
 						.success(function(data) {
+							$scope.alerts.push({
+								type: 'success',
+								msg: 'todo added successfully'
+							});
 							$scope.formData = {}; // clear the form so our user is ready to enter another
 							$scope.todos = data;
 							console.log(data);
@@ -50,4 +55,13 @@ angular.module('todoApp.controllers')
 						console.log('Error: ' + data);
 					});
 			};
+
+  			$scope.closeAlert = function(index) {
+			    $scope.alerts.splice(index, 1);		  
+			};
+
+			$scope.noTodos = function() {
+				return $scope.todos.length == 0;
+			};
+
 	}]);

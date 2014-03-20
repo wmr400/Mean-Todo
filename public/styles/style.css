@@ -6,6 +6,8 @@ body {
 	padding-top: 50px; 
 }
 
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
 #todo-form {
 	margin-bottom: 30px;
 }
@@ -20,4 +22,25 @@ body {
 
 #todo-list .panel-body {
 	word-wrap: break-word;
+}
+
+.animation.ng-enter,
+.animation.ng-leave{
+  -webkit-transition: 1s;
+}
+
+.animation.ng-enter {
+  opacity: 0;
+}
+
+.animation.ng-leave {
+  opacity: 1;
+}
+
+.animation.ng-enter.ng-enter-active {
+  opacity: 1;
+}
+
+.animation.ng-leave.ng-leave-active {
+  opacity: 0;
 }

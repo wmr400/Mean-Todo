@@ -3,13 +3,12 @@
 	<h1>You have <span class="label label-info">{{ todos.length }}</span> todos</h1>
 </div>
 
-<!-- <div class="row">
-	<div class="col-sm-10 col-sm-offset-1"> -->
+<div class="row">
 
-		<div class="row col-sm-5 col-md-5 col-lg-5 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
+		<div class="col-sm-8 col-md-8 col-lg-8">
 			<!-- FORM TO CREATE TODOS -->
 			<div id="todo-form" class="panel panel-primary">
-				<div class="panel-heading">
+				<div class="panel-heading text-center">
 			    	<h3 class="panel-title">Add a new todo...</h3>
 			  	</div>
 				<div class="panel-body">
@@ -30,19 +29,26 @@
 						</div>
 
 						<!-- createToDo() WILL CREATE NEW TODOS -->
-						<button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">Add</button>
+						<div id="submitButton">
+							<button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">Add</button>
+						</div>
 					</form>
 				</div>
 			</div>
 		</div>
 
-		<div class="row col-sm-4 col-md-4 col-lg-4 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
+		<div class="col-sm-4 col-md-4 col-lg-4">
 			<!-- TODO LIST -->
-			<div id="todo-list" class="panel panel-primary hide-{{ todos.length == 0 }} "> 
+			<div id="todo-list" class="panel panel-primary"> 
 				<div class="panel-heading">
-			    	<h3 class="panel-title">Manage your todos...</h3>
+			    	<h3 class="panel-title text-center">Manage your todos...</h3>
 			  	</div>
-			  	<div class="panel-body">
+				  	<div class="panel-body text-center pre-scrollable">
+
+				  	<div class="hide-{{ todos.length > 0 }}">
+				  		No todos...
+				  	</div>
+
 					<!-- LOOP OVER THE TODOS IN $scope.todos -->
 					<div class="checkbox" ng-repeat="todo in todos">
 						<label>
@@ -52,6 +58,4 @@
 				</div>
 			</div>
 		</div>
-
-<!-- 	</div>
-</div> -->
+</div>

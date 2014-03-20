@@ -1,15 +1,32 @@
 html { 
-	overflow-y:scroll; 
+	overflow-y: scroll;
 }
 
 body { 
-	padding-top:50px; 
+	padding-top: 50px; 
 }
 
-#todo-list { 
-	margin-bottom:30px; 
+#todo-form {
+	margin-bottom: 30px;
+	height: 383px;
 }
 
-div .hide-true {
+#todo-list {
+	margin-bottom: 30px;
+	min-height: 383px;
+	max-height: 383px;
+}
+
+#submitButton {
+	position: absolute;
+	bottom: 30px;
+	left: 30px;
+}
+
+.hide-true {
 	display: none;
+}
+
+#todo-list .panel-body {
+	word-wrap: break-word;
 }

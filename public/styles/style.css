@@ -25,7 +25,7 @@ body {
 }
 
 .animation.ng-enter,
-.animation.ng-leave{
+.animation.ng-leave {
   -webkit-transition: 1s;
 }
 

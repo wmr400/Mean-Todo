@@ -24,23 +24,56 @@ body {
 	word-wrap: break-word;
 }
 
-.animation.ng-enter,
-.animation.ng-leave{
-  -webkit-transition: 1s;
+.animation, .panel-animation {
+  	transition: 1s linear all;
+ 	-webkit-transition: 1s linear all;
+  	opacity: 1;
+}
+
+/*.panel-animation.disabled {
+	opacity: 0.5;
+}*/
+
+.animation.disabled {
+	opacity: 0.5;
 }
 
 .animation.ng-enter {
+  	opacity: 0;
+}
+
+.animation.ng-hide {
+  	opacity: 0;
+}
+
+.animation.ng-hide-active {
   opacity: 0;
 }
 
 .animation.ng-leave {
-  opacity: 1;
+  	opacity: 1;
 }
 
 .animation.ng-enter.ng-enter-active {
-  opacity: 1;
+  	opacity: 1;
 }
 
 .animation.ng-leave.ng-leave-active {
-  opacity: 0;
+  	opacity: 0;
+}
+
+.animation.ng-hide-add, .animation.ng-hide-remove {
+    /* this needs to be here to make it visible during the animation
+     since the .ng-hide class is already on the element rendering
+     it as hidden. 
+     */
+  	display: block!important;
+}
+
+.myalarm {
+	top: 0;
+	left: 0;
+	position: absolute;
+	width: 20%;
+	z-index: 123;
 }

@@ -8,6 +8,6 @@
 		"angular": "latest",
 		"angular-route": "latest",
 		"angular-animate": "latest",
-		"ui-bootstrap": "latest"
+		"angular-bootstrap": "latest"
 	}
 }

@@ -70,10 +70,25 @@ body {
   	display: block!important;
 }
 
-.myalarm {
+.alert {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+.alert.success {
+	z-index: 7000;
+}
+
+.alert.danger {
+	z-index: 14000;
+}
+
+/*.myalarm {
 	top: 0;
 	left: 0;
 	position: absolute;
 	width: 20%;
 	z-index: 123;
-}
+}*/

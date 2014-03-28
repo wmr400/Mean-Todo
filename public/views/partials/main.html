@@ -1,9 +1,5 @@
 
-<alert class="animation text-center success" ng-repeat="alert in successAlerts" type="alert.type" close="closeAlert($index, successAlerts)">
-	{{ alert.msg }}
-</alert>
-
-<alert class="animation text-center danger" ng-repeat="alert in dangerAlerts" type="alert.type" close="closeAlert($index, dangerAlerts)">
+<alert class="animation text-center" ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">
 	{{ alert.msg }}
 </alert>
 
@@ -44,8 +40,6 @@
 		</div>
 	</div>
 </div>
-
-
 
 <div class="row col-sm-10 col-sm-offset-1">
 	<div class="animation" ng-class="{'disabled': todos.length == 0}">

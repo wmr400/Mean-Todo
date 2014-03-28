@@ -6,7 +6,9 @@ body {
 	padding-top: 50px; 
 }
 
-.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+.nav, .pagination, .carousel, .panel-title a { 
+	cursor: pointer; 
+}
 
 #todo-form {
 	margin-bottom: 30px;
@@ -16,23 +18,17 @@ body {
 	margin-bottom: 30px;
 }
 
-.hide-true {
-	display: none;
-}
-
 #todo-list .panel-body {
 	word-wrap: break-word;
 }
+
+/* Animations */
 
 .animation, .panel-animation {
   	transition: 1s linear all;
  	-webkit-transition: 1s linear all;
   	opacity: 1;
 }
-
-/*.panel-animation.disabled {
-	opacity: 0.5;
-}*/
 
 .animation.disabled {
 	opacity: 0.5;
@@ -47,7 +43,7 @@ body {
 }
 
 .animation.ng-hide-active {
-  opacity: 0;
+    opacity: 0;
 }
 
 .animation.ng-leave {
@@ -70,6 +66,8 @@ body {
   	display: block!important;
 }
 
+/* Alerts */
+
 .alert {
 	position: fixed;
 	bottom: 0;
@@ -77,18 +75,10 @@ body {
 	right: 0;
 }
 
-.alert.success {
+.alert.alert-success {
 	z-index: 7000;
 }
 
-.alert.danger {
+.alert.alert-danger {
 	z-index: 14000;
 }
-
-/*.myalarm {
-	top: 0;
-	left: 0;
-	position: absolute;
-	width: 20%;
-	z-index: 123;
-}*/

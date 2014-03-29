@@ -1,8 +1,13 @@
 angular.module('todoApp.controllers')
 
-	.controller('MainController', ['$scope', '$http', 'TodoService', 'PersonService', function($scope, $http, TodoService, PersonService) {
+	.controller('MainController', [
+		'$scope', 
+		'$http', 
+		'TodoService', 
+		'PersonService', 
+		'AlertService',
+		function($scope, $http, TodoService, PersonService, AlertService) {
 			$scope.formData = {};
-			$scope.alerts = [];
 
 			// We've landed on the home page, retrieve all todos and display them.
 			TodoService.get()
@@ -19,7 +24,7 @@ angular.module('todoApp.controllers')
 			// 		$scope.persons = data;
 			// 		console.log(data);
 			// 	})
-			// 	.errror(function(data) {
+			// 	.error(function(data) {
 			// 		console.log('Error: ' + data);
 			// 	});
 
@@ -30,10 +35,7 @@ angular.module('todoApp.controllers')
 
 					TodoService.create($scope.formData)
 						.success(function(data) {
-							$scope.alerts.push({
-								type: 'success',
-								msg: 'todo added successfully'
-							});
+							AlertService.addSuccess('todo added successfully');
 							$scope.formData = {}; // clear the form so our user is ready to enter another
 							$scope.todos = data;
 							console.log(data);
@@ -48,24 +50,13 @@ angular.module('todoApp.controllers')
 			$scope.deleteTodo = function(id) {
 				TodoService.delete(id)
 					.success(function(data) {
-						$scope.alerts.push({
-								type: 'danger',
-								msg: 'todo deleted successfully'
-							});
+						AlertService.addSuccess('todo deleted successfully');
 						$scope.todos = data;
 						console.log(data);
 					})
 					.error(function(data) {
 						console.log('Error: ' + data);
 					});
-			};
-
-  			$scope.closeAlert = function(index) {
-			    $scope.alerts.splice(index, 1);		  
-			};
-
-			$scope.noTodos = function() {
-				return $scope.todos.length == 0;
 			};
 
 	}]);

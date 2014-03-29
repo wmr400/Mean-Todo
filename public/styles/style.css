@@ -73,12 +73,5 @@ body {
 	bottom: 0;
 	left: 0;
 	right: 0;
-}
-
-.alert.alert-success {
 	z-index: 7000;
-}
-
-.alert.alert-danger {
-	z-index: 14000;
 }

@@ -19,22 +19,27 @@
 			<form>
 				<div class="form-group">
 					<!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
-					<input type="text" id="todoBox" class="form-control input-lg" placeholder="TODO" ng-model="formData.text">
+					<label for="todoBox" id="todoLabel">Description</label>
+					<input type="text" id="todoBox" class="form-control input-lg" placeholder="So much to do, so little time!" ng-model="formData.text">
 				</div>
 
 				<div class="form-group">
-					<select class="form-control" id="userPicker">
-					  <option>Wouter</option>
-					  <option>2</option>
-					  <option>3</option>
-					  <option>4</option>
-					  <option>5</option>
-					</select>
+					<label for="priorityPicker" id="priorityLabel">Priority</label>
+					<select class="form-control" id="priorityPicker">
+						<option>Critical</option>
+						<option>Major</option>
+						<option>Minor</option>
+						<option>Trivial</option>
+						<option selected="selected">Undefined</option>
+				  	</select>
 				</div>
 
 				<!-- createTodo() WILL CREATE NEW TODOS -->
 				<div id="submitButton">
-					<button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">Add</button>
+					<button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">
+						<span class="glyphicon glyphicon-plus"></span> 
+						Add
+					</button>
 				</div>
 			</form>
 		</div>
@@ -48,12 +53,12 @@
 			<div class="panel-heading">
 		    	<h3 class="panel-title text-center">Manage your todos...</h3>
 		  	</div>
-		  	<div class="panel-body text-center">
+		  	<div class="panel-body">
 
 				<!-- LOOP OVER THE TODOS IN $scope.todos -->
-				<div class="checkbox" ng-repeat="todo in todos">
-					<label>
-						<input type="checkbox" ng-click="deleteTodo(todo._id)"> {{ todo.text }}
+				<div class="existingTodo text-center bg-success" ng-repeat="todo in todos" ng-click="deleteTodo(todo._id)">
+					<label for="deleteTodo">
+						{{ todo.text }}
 					</label>
 				</div>
 			</div>

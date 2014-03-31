@@ -4,10 +4,26 @@ angular.module('todoApp.controllers')
 		'$scope', 
 		'$http', 
 		'TodoService', 
-		'PersonService', 
 		'AlertService',
-		function($scope, $http, TodoService, PersonService, AlertService) {
-			$scope.formData = {};
+		function($scope, $http, TodoService, AlertService) {
+			
+			// The priorities that a todo can have.
+			$scope.priorities = [
+				'Undefined', 
+				'Critical', 
+				'Major', 
+				'Minor', 
+				'Trivial'
+			];
+
+			var resetFormData = function() {
+				$scope.formData = {
+					priority: 'Undefined'
+				};
+			}
+
+			// First, make sure the form is empty.
+			resetFormData();
 
 			// We've landed on the home page, retrieve all todos and display them.
 			TodoService.get()
@@ -19,15 +35,6 @@ angular.module('todoApp.controllers')
 					console.log('Error: ' + data);
 				});
 
-			// PersonService.get()
-			// 	.success(function(data) {
-			// 		$scope.persons = data;
-			// 		console.log(data);
-			// 	})
-			// 	.error(function(data) {
-			// 		console.log('Error: ' + data);
-			// 	});
-
 			// when submitting the add form, send the text to the node API
 			$scope.createTodo = function() {
 
@@ -36,7 +43,7 @@ angular.module('todoApp.controllers')
 					TodoService.create($scope.formData)
 						.success(function(data) {
 							AlertService.addSuccess('todo added successfully');
-							$scope.formData = {}; // clear the form so our user is ready to enter another
+							resetFormData(); // clear the form so our user is ready to enter another
 							$scope.todos = data;
 							console.log(data);
 						})

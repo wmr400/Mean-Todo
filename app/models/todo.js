@@ -1,16 +1,14 @@
 var mongoose = require('mongoose');
 
 var todoSchema = mongoose.Schema({
-	text: String,
+	description: String,
 	done: Boolean,
-	person_id: {
-		type: mongoose.Schema.Types.ObjectId,
-		ref: 'Person'
-	}
+	priority: String,
+	createDate: Date,
+	dueDate: Date
 });
 
 todoSchema.index({
-	person_id: 1,
 	text: 1
 });
 

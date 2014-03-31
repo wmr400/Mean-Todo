@@ -3,7 +3,6 @@ var repositoryFactory = require('./repositories/repositoryFactory');
 module.exports = function(app) {
 
 	var todoRepository = repositoryFactory.create('Todo');
-	var personRepository = repositoryFactory.create('Person');
 
 	// Get all todos.
 	app.get('/api/todos', function(req, res) {		
@@ -38,8 +37,9 @@ module.exports = function(app) {
 
 	function saveTodo(req, res) {
 		todoRepository.Save({
-			text: req.body.text,
-			done: false
+			description: req.body.description,
+			done: false,
+			priority: req.body.priority
 		}, function(err, todo) {
 			if (err) {
 				res.send(err);

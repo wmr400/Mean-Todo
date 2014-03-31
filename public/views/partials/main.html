@@ -20,17 +20,12 @@
 				<div class="form-group">
 					<!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
 					<label for="todoBox" id="todoLabel">Description</label>
-					<input type="text" id="todoBox" class="form-control input-lg" placeholder="So much to do, so little time!" ng-model="formData.text">
+					<input type="text" id="todoBox" class="form-control input-lg" placeholder="So much to do, so little time!" ng-model="formData.description">
 				</div>
 
 				<div class="form-group">
 					<label for="priorityPicker" id="priorityLabel">Priority</label>
-					<select class="form-control" id="priorityPicker">
-						<option>Critical</option>
-						<option>Major</option>
-						<option>Minor</option>
-						<option>Trivial</option>
-						<option selected="selected">Undefined</option>
+					<select class="form-control" id="priorityPicker" ng-options="prio for prio in priorities" ng-model="formData.priority">
 				  	</select>
 				</div>
 
@@ -67,7 +62,7 @@
 		  			</thead>
 		  			<tbody>
 		  				<tr ng-repeat="todo in todos" ng-class="{'danger': todo.priority == 'urgent'">
-		  					<td>{{ todo.text }}</td>
+		  					<td>{{ todo.description }}</td>
 		  					<td>{{ todo.priority }}</td>
 		  					<td>{{ todo.createDate }}</td>
 		  					<td>{{ todo.dueDate }}</td>

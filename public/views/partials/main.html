@@ -55,10 +55,31 @@
 		  	</div>
 		  	<div class="panel-body">
 
-				<!-- LOOP OVER THE TODOS IN $scope.todos -->
-				<div class="existingTodo text-center bg-info" ng-repeat="todo in todos" ng-click="deleteTodo(todo._id)">
-					<span class="text-info">{{ todo.text }}</span>
-				</div>
+		  		<table class="table table-hover" ng-if="todos.length > 0">
+		  			<thead>
+		  				<tr>
+		  					<th>Description</th>
+		  					<th>Priority</th>
+		  					<th>Date Created</th>
+		  					<th>Date Due</th>
+		  					<th></th>
+		  				</tr>
+		  			</thead>
+		  			<tbody>
+		  				<tr ng-repeat="todo in todos" ng-class="{'danger': todo.priority == 'urgent'">
+		  					<td>{{ todo.text }}</td>
+		  					<td>{{ todo.priority }}</td>
+		  					<td>{{ todo.createDate }}</td>
+		  					<td>{{ todo.dueDate }}</td>
+		  					<td>
+		  						<button type="button" class="btn btn-xs btn-success" ng-click="deleteTodo(todo._id)">
+		  							<span class="glyphicon glyphicon-ok"></span>
+		  						</button>
+	  						</td>
+		  				</tr>
+		  			</tbody>
+		  		</table>
+
 			</div>
 		</div>
 	</div>

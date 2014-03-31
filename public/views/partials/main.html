@@ -30,10 +30,12 @@
 				</div>
 
 				<!-- createTodo() WILL CREATE NEW TODOS -->
-				<div id="submitButton">
+				<div class="btn-group">
 					<button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">
-						<span class="glyphicon glyphicon-plus"></span> 
 						Add
+					</button>
+					<button type="reset" class="btn btn-primary btn-lg">
+						Reset
 					</button>
 				</div>
 			</form>
@@ -50,7 +52,7 @@
 		  	</div>
 		  	<div class="panel-body">
 
-		  		<table class="table table-hover" ng-if="todos.length > 0">
+		  		<table class="table table-hover table-condensed" ng-if="todos.length > 0">
 		  			<thead>
 		  				<tr>
 		  					<th>Description</th>
@@ -64,8 +66,8 @@
 		  				<tr ng-repeat="todo in todos" ng-class="{'danger': isCritical(todo)}">
 		  					<td>{{ todo.description }}</td>
 		  					<td>{{ todo.priority }}</td>
-		  					<td>{{ todo.createDate }}</td>
-		  					<td>{{ todo.dueDate }}</td>
+		  					<td>{{ getCreateDateTime(todo) }}</td>
+		  					<td>{{ getDueDateTime(todo) }}</td>
 		  					<td>
 		  						<button type="button" class="btn btn-xs btn-success" ng-click="deleteTodo(todo._id)">
 		  							<span class="glyphicon glyphicon-ok"></span>

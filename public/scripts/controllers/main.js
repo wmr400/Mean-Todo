@@ -38,7 +38,7 @@ angular.module('todoApp.controllers')
 			// when submitting the add form, send the text to the node API
 			$scope.createTodo = function() {
 
-				if (!$.isEmptyObject($scope.formData)) {
+				if ($scope.formData.description && $scope.formData.description.time().length > 0) {
 
 					TodoService.create($scope.formData)
 						.success(function(data) {
@@ -68,6 +68,24 @@ angular.module('todoApp.controllers')
 
 			$scope.isCritical = function(todo) {
 				return todo.priority == 'Critical';
+			};
+
+			$scope.getCreateDateTime = function(todo) {
+				var date = new Date(todo.createDate);
+				return date.toLocaleString();
+			};
+
+			$scope.getDueDateTime = function(todo) {
+				if (todo.dueDate) {
+					var date = new Date(todo.dueDate);
+					return date.toLocaleString();
+				} else {
+					return "-";
+				}
+			}
+
+			$scope.bla = function() {
+				return "sodaksod";
 			};
 
 	}]);

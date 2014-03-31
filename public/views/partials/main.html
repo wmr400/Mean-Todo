@@ -56,10 +56,8 @@
 		  	<div class="panel-body">
 
 				<!-- LOOP OVER THE TODOS IN $scope.todos -->
-				<div class="existingTodo text-center bg-success" ng-repeat="todo in todos" ng-click="deleteTodo(todo._id)">
-					<label for="deleteTodo">
-						{{ todo.text }}
-					</label>
+				<div class="existingTodo text-center bg-info" ng-repeat="todo in todos" ng-click="deleteTodo(todo._id)">
+					<span class="text-info">{{ todo.text }}</span>
 				</div>
 			</div>
 		</div>

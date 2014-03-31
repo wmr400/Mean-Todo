@@ -29,9 +29,9 @@ body {
 }
 
 .existingTodo {
-	border: 1px solid green;
+	border: 1px solid #428bca;
 	margin-bottom: 5px;
-	border-radius: 10px;
+	border-radius: 5px;
 }
 
 /* Animations */

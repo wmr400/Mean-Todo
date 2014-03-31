@@ -61,7 +61,7 @@
 		  				</tr>
 		  			</thead>
 		  			<tbody>
-		  				<tr ng-repeat="todo in todos" ng-class="{'danger': todo.priority == 'urgent'">
+		  				<tr ng-repeat="todo in todos" ng-class="{'danger': isCritical(todo)}">
 		  					<td>{{ todo.description }}</td>
 		  					<td>{{ todo.priority }}</td>
 		  					<td>{{ todo.createDate }}</td>

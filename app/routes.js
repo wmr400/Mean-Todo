@@ -39,7 +39,8 @@ module.exports = function(app) {
 		todoRepository.Save({
 			description: req.body.description,
 			done: false,
-			priority: req.body.priority
+			priority: req.body.priority,
+			createDate: new Date()
 		}, function(err, todo) {
 			if (err) {
 				res.send(err);

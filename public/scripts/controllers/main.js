@@ -66,4 +66,8 @@ angular.module('todoApp.controllers')
 					});
 			};
 
+			$scope.isCritical = function(todo) {
+				return todo.priority == 'Critical';
+			};
+
 	}]);

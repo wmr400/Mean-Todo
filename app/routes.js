@@ -40,7 +40,8 @@ module.exports = function(app) {
 			description: req.body.description,
 			done: false,
 			priority: req.body.priority,
-			createDate: new Date()
+			createDate: new Date(),
+			dueDate: new Date(req.body.dueDate)
 		}, function(err, todo) {
 			if (err) {
 				res.send(err);

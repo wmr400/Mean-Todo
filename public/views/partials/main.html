@@ -1,4 +1,3 @@
-
 <alert class="animation text-center" ng-repeat="alert in alerts" type="alert.type" close="alert.close()">
 	{{ alert.msg }}
 </alert>
@@ -34,10 +33,15 @@
 				</div>
 
 				<div class="form-group">
-					<label for="dueDatePicker" class="col-sm-1 control-label" id="priorityLabel">Due Date</label>
-					<div class="col-sm-offset-1 col-sm-10">
-						<datepicker id="dueDatePicker" ng-model="formData.dueDate"></datepicker>
-				  	</div>
+					<label for="dueDatePicker" class="col-sm-1 control-label" id="priorityLabel">Due</label>
+			        <div class="col-md-6">
+			            <p class="input-group">
+			              <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="formdata.dueDate" is-open="opened" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" />
+			              <span class="input-group-btn">
+			                <button class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+			              </span>
+			            </p>
+			        </div>
 				</div>
 
 				<!-- createTodo() WILL CREATE NEW TODOS -->

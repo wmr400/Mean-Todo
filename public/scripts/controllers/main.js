@@ -38,7 +38,7 @@ angular.module('todoApp.controllers')
 			// when submitting the add form, send the text to the node API
 			$scope.createTodo = function() {
 
-				if ($scope.formData.description && $scope.formData.description.time().length > 0) {
+				if ($scope.formData.description && $scope.formData.description.length > 0) {
 
 					TodoService.create($scope.formData)
 						.success(function(data) {
@@ -87,5 +87,30 @@ angular.module('todoApp.controllers')
 			$scope.bla = function() {
 				return "sodaksod";
 			};
+
+			// Disable weekend selection
+			  $scope.disabled = function(date, mode) {
+			    return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+			  };
+
+			  $scope.toggleMin = function() {
+			    $scope.minDate = ( $scope.minDate ) ? null : new Date();
+			  };
+			  $scope.toggleMin();
+
+			  $scope.open = function($event) {
+			    $event.preventDefault();
+			    $event.stopPropagation();
+
+			    $scope.opened = true;
+			  };
+
+			  $scope.dateOptions = {
+			    'year-format': "'yy'",
+			    'starting-day': 1
+			  };
+
+			  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'shortDate'];
+			  $scope.format = $scope.formats[0];
 
 	}]);

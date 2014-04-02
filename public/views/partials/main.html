@@ -18,38 +18,38 @@
 			<form class="form-horizontal">
 				<div class="form-group">
 					<!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
-					<label for="todoBox" class="col-sm-1 control-label" id="todoLabel">Description</label>
-					<div class="col-sm-offset-1 col-sm-10">
-						<input type="text" id="todoBox" class="form-control input-lg" placeholder="So much to do, so little time!" ng-model="formData.description">
+					<label for="todoBox" class="col-sm-2 col-sm-offset-1 control-label" id="todoLabel">Description</label>
+					<div class="col-sm-7">
+						<input type="text" id="todoBox" class="form-control" placeholder="So much to do, so little time!" ng-model="formData.description">
 					</div>
 				</div>
 
 				<div class="form-group">
-					<label for="priorityPicker" class="col-sm-1 control-label" id="priorityLabel">Priority</label>
-					<div class="col-sm-offset-1 col-sm-10">
+					<label for="priorityPicker" class="col-sm-2 col-sm-offset-1 control-label" id="priorityLabel">Priority</label>
+					<div class="col-sm-7">
 						<select class="form-control" id="priorityPicker" ng-options="prio for prio in priorities" ng-model="formData.priority">
 				  		</select>
 				  	</div>
 				</div>
 
 				<div class="form-group">
-					<label for="dueDatePicker" class="col-sm-1 control-label" id="priorityLabel">Due</label>
-			        <div class="col-md-6">
+					<label for="dueDatePicker" class="col-sm-2 col-sm-offset-1 control-label" id="priorityLabel">Due Date</label>
+			        <div class="col-sm-7">
 			            <p class="input-group">
-			              <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="formdata.dueDate" is-open="opened" min="minDate" max="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" />
+			              <input type="text" class="form-control" datepicker-popup="{{ format }}" ng-model="formData.dueDate" is-open="opened" min="minDate" datepicker-options="dateOptions" close-text="Close" />
 			              <span class="input-group-btn">
-			                <button class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+			                <button class="btn btn-default" ng-click="open($event)"><span class="glyphicon glyphicon-calendar"></span></button>
 			              </span>
 			            </p>
 			        </div>
 				</div>
 
 				<!-- createTodo() WILL CREATE NEW TODOS -->
-				<div class="btn-group">
-					<button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">
+				<div class="btn-group col-sm-offset-2">
+					<button type="submit" class="btn btn-primary" ng-click="createTodo()">
 						Add
 					</button>
-					<button type="reset" class="btn btn-primary btn-lg">
+					<button type="reset" class="btn btn-primary">
 						Reset
 					</button>
 				</div>
@@ -82,7 +82,7 @@
 		  					<td>{{ todo.description }}</td>
 		  					<td>{{ todo.priority }}</td>
 		  					<td>{{ getCreateDateTime(todo) }}</td>
-		  					<td>{{ getDueDateTime(todo) }}</td>
+		  					<td>{{ getDueDate(todo) }}</td>
 		  					<td>
 		  						<button type="button" class="btn btn-xs btn-success" ng-click="deleteTodo(todo._id)">
 		  							<span class="glyphicon glyphicon-ok"></span>

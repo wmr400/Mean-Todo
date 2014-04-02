@@ -72,45 +72,51 @@ angular.module('todoApp.controllers')
 
 			$scope.getCreateDateTime = function(todo) {
 				var date = new Date(todo.createDate);
-				return date.toLocaleString();
+				var options = { 
+					year: "numeric", 
+					month: "long", 
+					day: "numeric", 
+					hour: "numeric", 
+					minute: "numeric", 
+					second: "numeric", 
+					hour12: false
+				};
+				return date.toLocaleString("en-US", options);
 			};
 
-			$scope.getDueDateTime = function(todo) {
+			$scope.getDueDate = function(todo) {
 				if (todo.dueDate) {
+					var options = { 
+						year: "numeric", month: "long", day: "numeric"
+					};
 					var date = new Date(todo.dueDate);
-					return date.toLocaleString();
+					return date.toLocaleString("en-US", options);
 				} else {
 					return "-";
 				}
 			}
 
-			$scope.bla = function() {
-				return "sodaksod";
-			};
 
-			// Disable weekend selection
-			  $scope.disabled = function(date, mode) {
-			    return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
-			  };
+			/* Date picker stuff */
+			$scope.toggleMin = function() {
+				$scope.minDate = ( $scope.minDate ) ? null : new Date();
+		  	};
+			
+		    $scope.toggleMin();
 
-			  $scope.toggleMin = function() {
-			    $scope.minDate = ( $scope.minDate ) ? null : new Date();
-			  };
-			  $scope.toggleMin();
-
-			  $scope.open = function($event) {
-			    $event.preventDefault();
+	  	    $scope.open = function($event) {
+				$event.preventDefault();
 			    $event.stopPropagation();
 
 			    $scope.opened = true;
-			  };
+			};
 
-			  $scope.dateOptions = {
+			$scope.dateOptions = {
 			    'year-format': "'yy'",
 			    'starting-day': 1
-			  };
+			};
 
-			  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'shortDate'];
-			  $scope.format = $scope.formats[0];
+			$scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'shortDate'];
+			$scope.format = $scope.formats[0];
 
 	}]);

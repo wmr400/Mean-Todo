@@ -5,7 +5,7 @@
 <!-- HEADER AND TODO COUNT -->
 
 <div class="jumbotron text-center">
-	<h1>You have <span class="label label-info">{{ todos.length }}</span> todos</h1>
+	<h1>Pending todos: <span class="label label-info">{{ todos.length }}</span></h1>
 </div>
 
 <div class="row col-sm-10 col-sm-offset-1">
@@ -18,23 +18,23 @@
 			<form class="form-horizontal">
 				<div class="form-group">
 					<!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
-					<label for="todoBox" class="col-sm-2 col-sm-offset-1 control-label" id="todoLabel">Description</label>
-					<div class="col-sm-7">
+					<label for="todoBox" class="col-sm-2 control-label" id="todoLabel">Description</label>
+					<div class="col-sm-10">
 						<input type="text" id="todoBox" class="form-control" placeholder="So much to do, so little time!" ng-model="formData.description">
 					</div>
 				</div>
 
 				<div class="form-group">
-					<label for="priorityPicker" class="col-sm-2 col-sm-offset-1 control-label" id="priorityLabel">Priority</label>
-					<div class="col-sm-7">
+					<label for="priorityPicker" class="col-sm-2 control-label" id="priorityLabel">Priority</label>
+					<div class="col-sm-5">
 						<select class="form-control" id="priorityPicker" ng-options="prio for prio in priorities" ng-model="formData.priority">
 				  		</select>
 				  	</div>
 				</div>
 
 				<div class="form-group">
-					<label for="dueDatePicker" class="col-sm-2 col-sm-offset-1 control-label" id="priorityLabel">Due Date</label>
-			        <div class="col-sm-7">
+					<label for="dueDatePicker" class="col-sm-2 control-label" id="priorityLabel">Due Date</label>
+			        <div class="col-sm-5">
 			            <p class="input-group">
 			              <input type="text" class="form-control" datepicker-popup="{{ format }}" ng-model="formData.dueDate" is-open="opened" min="minDate" datepicker-options="dateOptions" close-text="Close" />
 			              <span class="input-group-btn">
@@ -65,9 +65,20 @@
 			<div class="panel-heading">
 		    	<h3 class="panel-title text-center">Manage your todos...</h3>
 		  	</div>
-		  	<div class="panel-body">
+		  	<div class="panel-body" ng-if="todos.length > 0">
 
-		  		<table class="table table-hover table-condensed" ng-if="todos.length > 0">
+		  		<div class="input-group col-sm-12">
+	            	<input type="text" id="filterBox" class="form-control" placeholder="Type to filter on description or priority..." ng-model="filterData">
+	            	<span class="input-group-btn">
+        				<button class="btn btn-default" type="button" ng-click="filterData = ''">
+        					<span class="glyphicon glyphicon-remove"></span>
+						</button>
+      				</span>
+	            </div>
+
+	            <br />
+
+		  		<table class="table table-hover table-condensed">
 		  			<thead>
 		  				<tr>
 		  					<th>Description</th>
@@ -78,7 +89,7 @@
 		  				</tr>
 		  			</thead>
 		  			<tbody>
-		  				<tr ng-repeat="todo in todos" ng-class="{'danger': isCritical(todo)}">
+		  				<tr ng-repeat="todo in todos | filter: filterData" ng-class="{'danger': isCritical(todo)}">
 		  					<td>{{ todo.description }}</td>
 		  					<td>{{ todo.priority }}</td>
 		  					<td>{{ getCreateDateTime(todo) }}</td>

@@ -74,7 +74,7 @@ angular.module('todoApp.controllers')
 				var date = new Date(todo.createDate);
 				var options = { 
 					year: "numeric", 
-					month: "long", 
+					month: "short", 
 					day: "numeric", 
 					hour: "numeric", 
 					minute: "numeric", 
@@ -87,12 +87,12 @@ angular.module('todoApp.controllers')
 			$scope.getDueDate = function(todo) {
 				if (todo.dueDate) {
 					var options = { 
-						year: "numeric", month: "long", day: "numeric"
+						year: "numeric", month: "short", day: "numeric"
 					};
 					var date = new Date(todo.dueDate);
 					return date.toLocaleString("en-US", options);
 				} else {
-					return "-";
+					return '-';
 				}
 			}
 
@@ -118,5 +118,28 @@ angular.module('todoApp.controllers')
 
 			$scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'shortDate'];
 			$scope.format = $scope.formats[0];
+
+			
+
+			// /* Grid stuff */
+			//var deleteButtonMarkup = '<button type="button" class="btn btn-xs btn-success" ng-click="deleteTodo(row.entity._id)"><span class="glyphicon glyphicon-ok"></span></button>';
+			var deleteButtonMarkup = '<div class="ngCellText" ng-class="col.colIndex()"><span ng-cell-text><button type="button" class="btn btn-xs btn-success" ng-click="deleteTodo(row.entity._id)"><span class="glyphicon glyphicon-ok"></span></button></span></div>';
+			var createDateMarkup = '<div class="ngCellText" ng-class="col.colIndex()"><span ng-cell-text>{{getCreateDateTime(row.entity)}}</span></div>';
+			var dueDateMarkup = '<div class="ngCellText" ng-class="col.colIndex()"><span ng-cell-text>{{getDueDate(row.entity)}}</span></div>';
+
+	      	var columnDefs = [ 
+	        	{ field: 'description', displayName: 'Description', width: '****', resizable: true },
+	        	{ field: 'priority', displayName: 'Priority', width: '*' },
+	        	{ field: 'createDate', cellTemplate: createDateMarkup, displayName: 'Date Created', width: '**' },
+	        	{ field: 'dueDate', cellTemplate: dueDateMarkup, displayName: 'Date Due', width: '*' },
+	        	{ displayName: '', cellClass: 'centerCell', cellTemplate: deleteButtonMarkup, resizable: false, width: 50 }
+	        ];
+
+ 			$scope.gridOptions = { 
+ 				data: 'todos', 
+ 				columnDefs: columnDefs,
+ 				enableRowSelection: false,
+ 				enableCellSelection: true,
+			};	
 
 	}]);

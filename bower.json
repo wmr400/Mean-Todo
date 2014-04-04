@@ -9,6 +9,7 @@
 		"angular-route": "latest",
 		"angular-animate": "latest",
 		"angular-bootstrap": "latest",
-		"ng-grid": "latest"
+		"ng-grid": "latest",
+		"underscore": "latest"
 	}
 }

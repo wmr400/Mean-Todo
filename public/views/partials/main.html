@@ -76,6 +76,11 @@
       				</span>
 	            </div>
 
+	            <div class="checkbox">
+	            	<label class="col-sm-2 control-label" for="onlyCriticalCheckBox">Show only critical</label>
+	            	<input type="checkbox" id="onlyCriticalCheckBox" class="form-control" ng-if="hasCriticalTodos()">
+	            </div>
+
 	            <br />
 
 		  		<div class="gridStyle" ng-grid="gridOptions">

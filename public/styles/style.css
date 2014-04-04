@@ -104,3 +104,23 @@ body {
 	text-align: center;
 }
 
+.rowCritical {
+	background-color: #f2dede;
+	color: #a94442;
+}
+
+.rowMajor {
+	background-color: #fcf8e3;
+	color: #8a6d3b;
+}
+
+.rowMinor {
+	background-color: #dff0d8;
+	color: #3c763d;
+}
+
+.rowUndefined {
+	background-color: #d9edf7;
+	color: #31708f;
+}
+

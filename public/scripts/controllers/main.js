@@ -13,7 +13,6 @@ angular.module('todoApp.controllers')
 				'Critical', 
 				'Major', 
 				'Minor', 
-				'Trivial'
 			];
 
 			var resetFormData = function() {
@@ -70,6 +69,14 @@ angular.module('todoApp.controllers')
 				return todo.priority == 'Critical';
 			};
 
+			$scope.hasCriticalTodos = function() {
+				var criticalTodos = _.where($scope.todos, { 
+					priority: 'Critical' 
+				});
+
+				return criticalTodos.length > 0;
+			}
+
 			$scope.getCreateDateTime = function(todo) {
 				var date = new Date(todo.createDate);
 				var options = { 
@@ -87,7 +94,9 @@ angular.module('todoApp.controllers')
 			$scope.getDueDate = function(todo) {
 				if (todo.dueDate) {
 					var options = { 
-						year: "numeric", month: "short", day: "numeric"
+						year: "numeric", 
+						month: "short", 
+						day: "numeric"
 					};
 					var date = new Date(todo.dueDate);
 					return date.toLocaleString("en-US", options);
@@ -122,14 +131,24 @@ angular.module('todoApp.controllers')
 			
 
 			// /* Grid stuff */
-			//var deleteButtonMarkup = '<button type="button" class="btn btn-xs btn-success" ng-click="deleteTodo(row.entity._id)"><span class="glyphicon glyphicon-ok"></span></button>';
 			var deleteButtonMarkup = '<div class="ngCellText" ng-class="col.colIndex()"><span ng-cell-text><button type="button" class="btn btn-xs btn-success" ng-click="deleteTodo(row.entity._id)"><span class="glyphicon glyphicon-ok"></span></button></span></div>';
 			var createDateMarkup = '<div class="ngCellText" ng-class="col.colIndex()"><span ng-cell-text>{{getCreateDateTime(row.entity)}}</span></div>';
 			var dueDateMarkup = '<div class="ngCellText" ng-class="col.colIndex()"><span ng-cell-text>{{getDueDate(row.entity)}}</span></div>';
 
+			var rowClassMarkup = 
+				'ng-class="{rowCritical: row.getProperty(\'priority\') === \'Critical\', ' +
+				// 'rowMajor: row.getProperty(\'priority\') === \'Major\', ' + 
+				// 'rowMinor: row.getProperty(\'priority\') === \'Minor\', ' +
+				'rowUndefined: row.getProperty(\'priority\') === \'Undefined\'}"';
+
+			var rowTemplate = '<div style="height: 100%" ' + rowClassMarkup + '><div ng-style="{ \'cursor\': row.cursor }" ng-repeat="col in renderedColumns" ng-class="col.colIndex()" class="ngCell ">' +
+                           '<div class="ngVerticalBar" ng-style="{height: rowHeight}" ng-class="{ ngVerticalBarVisible: !$last }"> </div>' +
+                           '<div ng-cell></div>' +
+                     '</div></div>'
+
 	      	var columnDefs = [ 
 	        	{ field: 'description', displayName: 'Description', width: '****', resizable: true },
-	        	{ field: 'priority', displayName: 'Priority', width: '*' },
+	        	{ field: 'priority', displayName: 'Priority', width: '*', visible: false },
 	        	{ field: 'createDate', cellTemplate: createDateMarkup, displayName: 'Date Created', width: '**' },
 	        	{ field: 'dueDate', cellTemplate: dueDateMarkup, displayName: 'Date Due', width: '*' },
 	        	{ displayName: '', cellClass: 'centerCell', cellTemplate: deleteButtonMarkup, resizable: false, width: 50 }
@@ -138,6 +157,7 @@ angular.module('todoApp.controllers')
  			$scope.gridOptions = { 
  				data: 'todos', 
  				columnDefs: columnDefs,
+ 				rowTemplate: rowTemplate,
  				enableRowSelection: false,
  				enableCellSelection: true,
 			};	

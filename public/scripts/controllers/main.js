@@ -154,8 +154,8 @@ angular.module('todoApp.controllers')
  				data: 'todos', 
  				columnDefs: columnDefs,
  				rowTemplate: rowTemplate,
- 				enableRowSelection: true,
- 				enableCellSelection: true,
+ 				enableRowSelection: false,
+ 				enableCellSelection: false,
  				filterOptions: $scope.filterData,
  				showColumnMenu: true,
 			};	

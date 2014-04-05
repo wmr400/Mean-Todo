@@ -1,18 +1,8 @@
-<alert class="animation text-center" ng-repeat="alert in alerts" type="alert.type" close="alert.close()">
-	{{ alert.msg }}
-</alert>
-
-<!-- HEADER AND TODO COUNT -->
-
-<div class="jumbotron text-center">
-	<h1>Pending todos: <span class="label label-info">{{ todos.length }}</span></h1>
-</div>
-
-<div class="row col-sm-10 col-sm-offset-1">
+<div class="row col-sm-12">
 	<!-- FORM TO CREATE TODOS -->
 	<div id="todo-form" class="panel panel-primary">
 		<div class="panel-heading text-center">
-	    	<h3 class="panel-title">Add a new todo...</h3>
+	    	<h3 class="panel-title">Add a new todo</h3>
 	  	</div>
 		<div class="panel-body">
 			<form class="form-horizontal">
@@ -58,27 +48,22 @@
 	</div>
 </div>
 
-<div class="row col-sm-10 col-sm-offset-1">
+<div class="row col-sm-12">
 	<div class="animation" ng-class="{'disabled': todos.length == 0}">
 		<!-- TODO LIST -->
 		<div id="todo-list" class="panel panel-primary"> 
 			<div class="panel-heading">
-		    	<h3 class="panel-title text-center">Manage your todos...</h3>
+		    	<h3 class="panel-title text-center">Manage your todos <span class="badge">{{ todos.length }}</span></h3>
 		  	</div>
 		  	<div class="panel-body" ng-if="todos.length > 0">
 
 		  		<div class="input-group col-sm-12">
-	            	<input type="text" id="filterBox" class="form-control" placeholder="Type to filter on description or priority..." ng-model="filterData">
+	            	<input type="text" id="filterBox" class="form-control" placeholder="Type to filter on description or priority..." ng-model="filterData.filterText">
 	            	<span class="input-group-btn">
-        				<button class="btn btn-default" type="button" ng-click="filterData = ''">
+        				<button class="btn btn-default" type="button" ng-click="filterData.filterText = ''">
         					<span class="glyphicon glyphicon-remove"></span>
 						</button>
       				</span>
-	            </div>
-
-	            <div class="checkbox">
-	            	<label class="col-sm-2 control-label" for="onlyCriticalCheckBox">Show only critical</label>
-	            	<input type="checkbox" id="onlyCriticalCheckBox" class="form-control" ng-if="hasCriticalTodos()">
 	            </div>
 
 	            <br />

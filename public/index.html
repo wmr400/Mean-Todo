@@ -21,6 +21,24 @@
 	
 </head>
 <body>
+
+	<!-- HEADER AND NAVBAR -->
+	<header>
+		<nav class="navbar navbar-default">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="/">AngularJS + Node.js Organizer</a>
+			</div>
+
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="/"><span class="fa fa-home"></span> Home</a></li>
+				<li><a href="/about"><span class="fa fa-shield"></span> About</a></li>
+				<li><a href="/contact"><span class="fa fa-comment"></span> Contact</a></li>
+			</ul>
+		</div>
+		</nav>
+	</header>
+
 	<div class="container col-sm-12">
 	
 		<alert class="animation text-center" ng-repeat="alert in alerts" type="alert.type" close="alert.close()">

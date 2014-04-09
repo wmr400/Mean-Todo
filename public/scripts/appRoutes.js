@@ -10,6 +10,11 @@ angular.module('appRoutes', [])
 			controller: 'MainController'
 		})
 
+		.when('/about', {
+			templateUrl: 'views/partials/about.html',
+			controller: 'MainController'
+		});
+
 	$locationProvider.html5Mode(true);
 
 }]);

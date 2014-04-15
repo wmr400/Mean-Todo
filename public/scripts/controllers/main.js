@@ -15,11 +15,15 @@ angular.module('todoApp.controllers')
 				'Minor', 
 			];
 
+			$scope.todos = [];
+
 			var resetFormData = function() {
 				$scope.formData = {
 					priority: 'Undefined'
 				};
 			}
+
+			
 
 			// First, make sure the form is empty.
 			resetFormData();
@@ -29,6 +33,16 @@ angular.module('todoApp.controllers')
 				.success(function(data) {
 					$scope.todos = data;
 					console.log(data);
+					console.log('length = ' + $scope.todos.length);
+			
+					for (var i = 0; i < $scope.todos.length; i++) {
+						$scope.$watch('todos[' + i + '].done' , function(newValue, oldValue) {
+							if (newValue !== oldValue) {
+								console.log('new: ' + newValue);
+							}
+						});
+					}
+
 				})
 				.error(function(data) {
 					console.log('Error: ' + data);
@@ -66,7 +80,7 @@ angular.module('todoApp.controllers')
 			};
 
 			$scope.isCritical = function(todo) {
-				return todo.priority == 'Critical';
+				return todo.priority === 'Critical';
 			};
 
 			$scope.getCreateDateTime = function(todo) {
@@ -83,7 +97,7 @@ angular.module('todoApp.controllers')
 				return date.toLocaleString("en-US", options);
 			};
 
-			$scope.getDueDate = function(todo) {
+			$scope.getDueDateString = function(todo) {
 				if (todo.dueDate) {
 					var options = { 
 						year: "numeric", 
@@ -91,9 +105,9 @@ angular.module('todoApp.controllers')
 						day: "numeric"
 					};
 					var date = new Date(todo.dueDate);
-					return date.toLocaleString("en-US", options);
+					return 'Due: ' + date.toLocaleString("en-US", options);
 				} else {
-					return '-';
+					return 'No due date';
 				}
 			}
 
@@ -119,45 +133,4 @@ angular.module('todoApp.controllers')
 
 			$scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'shortDate'];
 			$scope.format = $scope.formats[0];
-
-			
-
-			// /* Grid stuff */
-			$scope.filterData = {
-				filterText: ''
-			};
-
-			var deleteButtonMarkup = '<div class="ngCellText" ng-class="col.colIndex()"><span ng-cell-text><button type="button" class="btn btn-xs btn-success" ng-click="deleteTodo(row.entity._id)"><span class="glyphicon glyphicon-ok"></span></button></span></div>';
-			var createDateMarkup = '<div class="ngCellText" ng-class="col.colIndex()"><span ng-cell-text>{{getCreateDateTime(row.entity)}}</span></div>';
-			var dueDateMarkup = '<div class="ngCellText" ng-class="col.colIndex()"><span ng-cell-text>{{getDueDate(row.entity)}}</span></div>';
-
-			var rowClassMarkup = 
-				'ng-class="{rowCritical: row.getProperty(\'priority\') === \'Critical\', ' +
-				// 'rowMajor: row.getProperty(\'priority\') === \'Major\', ' + 
-				// 'rowMinor: row.getProperty(\'priority\') === \'Minor\', ' +
-				'rowUndefined: row.getProperty(\'priority\') === \'Undefined\'}"';
-
-			var rowTemplate = '<div style="height: 100%" ' + rowClassMarkup + '><div ng-style="{ \'cursor\': row.cursor }" ng-repeat="col in renderedColumns" ng-class="col.colIndex()" class="ngCell ">' +
-                           '<div class="ngVerticalBar" ng-style="{height: rowHeight}" ng-class="{ ngVerticalBarVisible: !$last }"> </div>' +
-                           '<div ng-cell></div>' +
-                     '</div></div>'
-
-	      	var columnDefs = [ 
-	        	{ field: 'description', displayName: 'Description', width: '****' },
-	        	{ field: 'priority', displayName: 'Priority', width: '*' },
-	        	{ field: 'createDate', cellTemplate: createDateMarkup, displayName: 'Date Created', width: '**' },
-	        	{ field: 'dueDate', cellTemplate: dueDateMarkup, displayName: 'Date Due', width: '*' },
-	        	{ field: 'action', displayName: 'Action', cellClass: 'centerCell', cellTemplate: deleteButtonMarkup, width: '*', sortable: false }
-	        ];
-
- 			$scope.gridOptions = { 
- 				data: 'todos', 
- 				columnDefs: columnDefs,
- 				rowTemplate: rowTemplate,
- 				enableRowSelection: false,
- 				enableCellSelection: false,
- 				filterOptions: $scope.filterData,
- 				showColumnMenu: true,
-			};	
-
 	}]);

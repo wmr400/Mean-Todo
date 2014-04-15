@@ -2,7 +2,7 @@
 	<!-- FORM TO CREATE TODOS -->
 	<div id="todo-form" class="panel panel-primary">
 		<div class="panel-heading text-center">
-	    	<h3 class="panel-title">Add a new todo</h3>
+	    	<h1 class="panel-title">Add a new todo</h1>
 	  	</div>
 		<div class="panel-body">
 			<form class="form-horizontal">
@@ -53,25 +53,33 @@
 		<!-- TODO LIST -->
 		<div id="todo-list" class="panel panel-primary"> 
 			<div class="panel-heading">
-		    	<h3 class="panel-title text-center">Manage your todos <span class="badge">{{ todos.length }}</span></h3>
+		    	<h1 class="panel-title text-center">Manage your todos <span class="badge">{{ todos.length }}</span></h1>
 		  	</div>
 		  	<div class="panel-body" ng-if="todos.length > 0">
 
-		  		<div class="col-sm-12">
-				  	<div class="form-group has-feedback">
-			  			<label class="control-label invisible">So that the button is placed in the input field...</label>
-		            	<input type="text" id="filterBox" class="form-control" placeholder="Type to filter on description or priority..." ng-model="filterData.filterText">
-	    				<button class="close form-control-feedback" type="button" ng-click="filterData.filterText = ''">
-	    					<span class="glyphicon glyphicon-remove"></span>
-						</button>
-
-		            	<br />
-
-				  		<div class="gridStyle" ng-grid="gridOptions">
-				  		</div>
-					</div>
-				</div>
+		  		<ul class="list-group">
+		  			<li class="list-group-item" ng-repeat="todo in todos | filter: filterText" ng-class="{'rowCritical': isCritical(todo), 'todo-done': todo.done}">
+		  				<div class="checkbox">
+		  					<label class="control-label">
+		  						<input type="checkbox" ng-model="todo.done"></input>
+		  						{{ todo.description }} ({{ getDueDateString(todo) }})
+		  					</label>
+		  				</div>
+		  			</li>
+		  		</ul>
+		  		
 			</div>
+
+			<div class="panel-footer">
+			  	<div class="form-group has-feedback">
+		  			<label class="control-label invisible">So that the button is placed in the input field...</label>
+	            	<input type="text" id="filterBox" class="form-control" placeholder="Type to filter on description or priority..." ng-model="filterText">
+    				<button class="close form-control-feedback" type="button" ng-click="filterText = ''">
+    					<span class="glyphicon glyphicon-remove"></span>
+					</button>
+				</div>
+		  	</div>
+
 		</div>
 	<div>
 </div>

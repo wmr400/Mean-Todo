@@ -83,18 +83,6 @@ body {
 	z-index: 7000;
 }
 
-/* For ng-grid */
-.gridStyle {
-    border: 1px solid rgb(212,212,212);
-    width: 100%; 
-    height: 300px;
-    border-radius: 5px;
-}
-
-.centerCell {
-	text-align: center;
-}
-
 .rowCritical {
 	background-color: #f2dede;
 	color: #a94442;
@@ -115,3 +103,8 @@ body {
 	color: #31708f;
 }
 
+.todo-done {
+	text-decoration: line-through;
+	background-color: white;
+	color: gray;
+}

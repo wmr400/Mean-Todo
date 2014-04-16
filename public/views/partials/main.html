@@ -58,7 +58,7 @@
 		  	<div class="panel-body" ng-if="todos.length > 0">
 
 		  		<ul class="list-group">
-		  			<li class="list-group-item" ng-repeat="todo in todos | filter: filterText" ng-class="{'rowCritical': isCritical(todo), 'todo-done': todo.done}">
+		  			<li class="list-group-item" ng-repeat="todo in todos | filter: {description: filterText}" ng-class="{'rowCritical': isCritical(todo), 'todo-done': todo.done}">
 		  				<div class="checkbox">
 		  					<label class="control-label">
 		  						<input type="checkbox" ng-model="todo.done"></input>
@@ -73,7 +73,7 @@
 			<div class="panel-footer">
 			  	<div class="form-group has-feedback">
 		  			<label class="control-label invisible">So that the button is placed in the input field...</label>
-	            	<input type="text" id="filterBox" class="form-control" placeholder="Type to filter on description or priority..." ng-model="filterText">
+	            	<input type="text" id="filterBox" class="form-control" placeholder="Type to filter on description..." ng-model="filterText">
     				<button class="close form-control-feedback" type="button" ng-click="filterText = ''">
     					<span class="glyphicon glyphicon-remove"></span>
 					</button>

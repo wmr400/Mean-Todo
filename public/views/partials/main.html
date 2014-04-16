@@ -58,7 +58,8 @@
 		  	<div class="panel-body" ng-if="todos.length > 0">
 
 		  		<ul class="list-group">
-		  			<li class="list-group-item" ng-repeat="todo in todos | filter: {description: filterText}" ng-class="{'rowCritical': isCritical(todo), 'todo-done': todo.done}">
+		  			<li class="list-group-item" ng-repeat="todo in todos | filter: {description: filterText}" 
+		  				ng-class="{'rowCritical': isCritical(todo), 'todo-done': todo.done}">
 		  				<div class="checkbox">
 		  					<label class="control-label">
 		  						<input type="checkbox" ng-model="todo.done"></input>

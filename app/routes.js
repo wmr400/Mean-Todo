@@ -11,7 +11,12 @@ module.exports = function(app) {
 
 	// Create todo and return all todos.
 	app.post('/api/todos', function(req, res) {
-		saveTodo(req, res);		
+		createTodo(req, res);		
+	});
+
+	// Update an existing todo, and return all of them.
+	app.put('/api/todos/:todo_id', function(req, res) {
+		updateTodo(req, res);
 	});
 
 	// delete a todo
@@ -35,12 +40,29 @@ module.exports = function(app) {
 		});
 	}
 
-	function saveTodo(req, res) {
+	function createTodo(req, res) {
 		todoRepository.Save({
 			description: req.body.description,
 			done: false,
 			priority: req.body.priority,
 			createDate: new Date(),
+			dueDate: req.body.dueDate ? new Date(req.body.dueDate) : null
+		}, function(err, todo) {
+			if (err) {
+				res.send(err);
+			}
+			
+			findAllTodos(res);
+		});
+	}
+
+	function updateTodo(req, res) {
+		todoRepository.Update({
+			id: req.params.todo_id,
+			description: req.body.description,
+			done: req.body.done,
+			priority: req.body.priority,
+			createDate: req.body.createDate,
 			dueDate: req.body.dueDate ? new Date(req.body.dueDate) : null
 		}, function(err, todo) {
 			if (err) {

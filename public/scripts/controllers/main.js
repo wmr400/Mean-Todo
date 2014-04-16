@@ -2,10 +2,11 @@ angular.module('todoApp.controllers')
 
 	.controller('MainController', [
 		'$scope', 
-		'$http', 
+		'$http',
+		'$log', 
 		'TodoService', 
 		'AlertService',
-		function($scope, $http, TodoService, AlertService) {
+		function($scope, $http, $log, TodoService, AlertService) {
 			
 			// The priorities that a todo can have.
 			$scope.priorities = [
@@ -15,15 +16,29 @@ angular.module('todoApp.controllers')
 				'Minor', 
 			];
 
-			$scope.todos = [];
+			window.scope = $scope;
 
 			var resetFormData = function() {
 				$scope.formData = {
 					priority: 'Undefined'
 				};
-			}
+			};
 
-			
+			var registerWatchCallbacks = function() {
+				for (var i = 0; i < $scope.todos.length; i++) {
+					registerWatchCallback(i);
+				}
+			};
+
+			var registerWatchCallback = function(todoIndex) {
+				$log.debug('setting single watch callback for todoIndex [' + todoIndex + '].');
+				$scope.$watch('todos[' + todoIndex + ']' , function(newValue, oldValue) {
+					if (newValue.done !== oldValue.done) {
+						$log.debug('new: ' + angular.toJson(newValue, true));
+						TodoService.update(newValue._id, newValue);
+					}
+				}, true);
+			};
 
 			// First, make sure the form is empty.
 			resetFormData();
@@ -33,15 +48,8 @@ angular.module('todoApp.controllers')
 				.success(function(data) {
 					$scope.todos = data;
 					console.log(data);
-					console.log('length = ' + $scope.todos.length);
 			
-					for (var i = 0; i < $scope.todos.length; i++) {
-						$scope.$watch('todos[' + i + '].done' , function(newValue, oldValue) {
-							if (newValue !== oldValue) {
-								console.log('new: ' + newValue);
-							}
-						});
-					}
+					registerWatchCallbacks();
 
 				})
 				.error(function(data) {
@@ -59,6 +67,8 @@ angular.module('todoApp.controllers')
 							resetFormData(); // clear the form so our user is ready to enter another
 							$scope.todos = data;
 							console.log(data);
+
+							registerWatchCallback($scope.todos.length - 1);
 						})
 						.error(function(data) {
 							console.log('Error: ' + data);

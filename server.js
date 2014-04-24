@@ -4,6 +4,8 @@ var app = express();
 var mongoose = require('mongoose');
 var database = require('./config/database');
 
+var port = process.env.PORT || 8080;
+
 // Configuration.
 mongoose.connect(database.url);
 
@@ -18,5 +20,5 @@ app.configure(function() {
 require('./app/routes')(app);
 
 // listen (start app with node server.js) ======================================
-app.listen(8080);
-console.log("App listening on port 8080");
+app.listen(port);
+console.log('App listening on port ' + port);

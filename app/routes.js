@@ -1,8 +1,9 @@
-var repositoryFactory = require('./repositories/repositoryFactory');
+//var repositoryFactory = require('./repositories/repositoryFactory');
+var Todo = require('./models/todo');
 
 module.exports = function(app) {
 
-	var todoRepository = repositoryFactory.create('Todo');
+	//var todoRepository = repositoryFactory.create('Todo');
 
 	// Get all todos.
 	app.get('/api/todos', function(req, res) {		
@@ -16,7 +17,7 @@ module.exports = function(app) {
 
 	// Update an existing todo, and return all of them.
 	app.put('/api/todos/:todo_id', function(req, res) {
-		updateTodo(req, res);
+		//updateTodo(req, res);
 	});
 
 	// delete a todo
@@ -29,8 +30,8 @@ module.exports = function(app) {
 		res.sendfile('./public/index.html');
 	});
 
-	function findAllTodos(res) {
-		todoRepository.FindAllTodos(function(err, todos) {
+	var findAllTodos = function(res) {
+		Todo.find(function(err, todos) {
 			if (err) {
 				//res.send(err);
 				console.log(err);
@@ -38,10 +39,10 @@ module.exports = function(app) {
 		
 			res.json(todos);
 		});
-	}
+	};
 
-	function createTodo(req, res) {
-		todoRepository.Save({
+	var createTodo = function(req, res) {
+		Todo.create({
 			description: req.body.description,
 			done: false,
 			priority: req.body.priority,
@@ -49,39 +50,41 @@ module.exports = function(app) {
 			dueDate: req.body.dueDate ? new Date(req.body.dueDate) : null
 		}, function(err, todo) {
 			if (err) {
-				res.send(err);
+				//res.send(err);
+				console.log(err);
 			}
 			
 			findAllTodos(res);
 		});
-	}
+	};
 
-	function updateTodo(req, res) {
-		todoRepository.Update({
-			id: req.params.todo_id,
-			description: req.body.description,
-			done: req.body.done,
-			priority: req.body.priority,
-			createDate: req.body.createDate,
-			dueDate: req.body.dueDate ? new Date(req.body.dueDate) : null
-		}, function(err, todo) {
-			if (err) {
-				res.send(err);
-			}
+	// var updateTodo = function(req, res) {
+	// 	todoRepository.Update({
+	// 		id: req.params.todo_id,
+	// 		description: req.body.description,
+	// 		done: req.body.done,
+	// 		priority: req.body.priority,
+	// 		createDate: req.body.createDate,
+	// 		dueDate: req.body.dueDate ? new Date(req.body.dueDate) : null
+	// 	}, function(err, todo) {
+	// 		if (err) {
+	// 			res.send(err);
+	// 		}
 			
-			findAllTodos(res);
-		});
-	}
+	// 		findAllTodos(res);
+	// 	});
+	// };
 
-	function deleteTodo(req, res) {
-		todoRepository.DeleteById({
+	var deleteTodo = function(req, res) {
+		Todo.remove({
 			_id : req.params.todo_id
 		}, function(err, todo) {
 			if (err) {
-				res.send(err);
+				// res.send(err);
+				console.log(err);
 			}
 
 			findAllTodos(res);
 		});
-	}
+	};
 };
